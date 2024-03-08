@@ -1,0 +1,4 @@
+./data
+#remove FROM GIT all node_modules folders .gitignore
+node_modules/
+
