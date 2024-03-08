@@ -1,0 +1,77 @@
+<mat-form-field class="example-full-width">
+  <mat-label>Nome</mat-label>
+  <input matInput [(ngModel)]="filter.name">
+</mat-form-field>
+<mat-form-field class="example-full-width">
+  <mat-label>Idade</mat-label>
+  <input matInput [(ngModel)]="filter.age" type="number" min="0">
+</mat-form-field>
+<mat-form-field class="example-full-width">
+  <mat-label>email</mat-label>
+  <input matInput [(ngModel)]="filter.email">
+</mat-form-field>
+<mat-form-field class="example-full-width">
+  <mat-label>CPF</mat-label>
+  <input matInput [(ngModel)]="filter.cpf">
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Data de Nascimento</mat-label>
+  <input matInput [matDatepicker]="picker" [(ngModel)]="filter.birthDate">
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field class="example-full-width">
+  <mat-label>Data Nascimento</mat-label>
+  <input matInput [(ngModel)]="filter.name">
+</mat-form-field>
+<mat-form-field class="example-full-width">
+  <mat-label>Genero</mat-label>
+  <input matInput [(ngModel)]="filter.gender">
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="getPatients()">Filtrar</button>
+
+
+<table mat-table [dataSource]="patients" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nome </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="age">
+    <th mat-header-cell *matHeaderCellDef> Idade </th>
+    <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> E-Mail </th>
+    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="cpf">
+    <th mat-header-cell *matHeaderCellDef> CPF </th>
+    <td mat-cell *matCellDef="let element"> {{element.cpf}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="birthDate">
+    <th mat-header-cell *matHeaderCellDef> Data de nascimento </th>
+    <td mat-cell *matCellDef="let element"> {{element.birthDate | date:'dd-MM-YYYY'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="gender">
+    <th mat-header-cell *matHeaderCellDef> Data de nascimento </th>
+    <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

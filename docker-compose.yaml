@@ -1,0 +1,39 @@
+version: '3.1'
+services:
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.18
+    container_name: elastic-treinamento
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - 9200:9200
+      - 9300:9300
+    volumes:
+      - ./data/elasticsearch:/usr/share/elasticsearch/data
+    networks:
+      - elk
+    restart: always
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.18
+    container_name: kibana-treinamento
+    ports:
+      - 5601:5601
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elastic:9200
+    networks:
+      - elk
+    restart: always
+
+  redis:
+    image: redis/redis-stack-server:latest
+    container_name: redis-treinamento
+    ports:
+      - 6379:6379
+    networks:
+      - elk
+    restart: always
+
+networks:
+  elk:
+    driver: bridge
